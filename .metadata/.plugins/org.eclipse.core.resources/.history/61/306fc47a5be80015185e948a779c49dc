@@ -1,0 +1,20 @@
+
+
+
+public class CheckMessageTask implements Runnable {
+
+	@Override
+	public void run() {
+		//
+		ChatService chatService = new ChatService();
+		//
+		String req = chatService.readMessage();
+		//
+		if (!"".equals(req)){
+			Client client = new Client();
+			String resp = client.process(req);
+			chatService.writeMessage(resp);
+		}
+	}
+
+}

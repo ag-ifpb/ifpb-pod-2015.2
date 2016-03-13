@@ -1,0 +1,29 @@
+import java.util.Scanner;
+
+
+public class Main {
+	private static boolean exit = false;
+
+	public static void main(String[] args) {
+		//
+		final ChatService service = new ChatService();
+		final Scanner scanner = new Scanner(System.in);
+		//message
+		System.out.println("Iniciando a aplicação. Digite '#exit' se desejar sair ou tecle ENTER para continuar");
+		//
+		while(!exit){
+			//escrita
+			System.out.print(service.receiveMessage());
+			//leitura
+			if (scanner.hasNext()){
+				//leitura
+				String msg = scanner.nextLine();
+				if("#exit".equals(msg)) exit = true;
+				service.sendMessage(msg);
+			}
+		}
+		//
+		scanner.close();
+	}
+	
+}

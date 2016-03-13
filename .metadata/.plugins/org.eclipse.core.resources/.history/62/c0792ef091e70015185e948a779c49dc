@@ -1,0 +1,15 @@
+
+public class Main {
+
+	public static void main(String[] args) {
+		//verificar se há mensagem
+		ChatService service = new ChatService();
+		
+		String msg = service.readMessage();
+		
+		//havendo, enviar
+		Client client = new Client();
+		String msg = client.process("Olá");
+		System.out.println(msg);
+	}
+}

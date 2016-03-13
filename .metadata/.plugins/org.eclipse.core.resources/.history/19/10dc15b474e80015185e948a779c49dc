@@ -1,0 +1,30 @@
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertTrue;
+
+import java.io.File;
+
+import org.junit.Test;
+
+
+public class MemoryDatastoreTest {
+
+	@Test
+	public void test() {
+		ChatService service = new ChatService();
+		//verificar se o arquivo foi criado
+		File to = new File(ChatService.TO);
+		assertFalse(to.exists());
+		//ler a mensagem para envio
+		String sendmsg = service.readMessage();
+		assertEquals("", sendmsg);
+		//escrever a resposta
+		service.writeMessage("Mensagem");
+		//verificar se o arquivo from.txt existe
+		File from = new File(ChatService.FROM);
+		assertTrue(from.exists());
+		//
+		from.delete();
+	}
+
+}

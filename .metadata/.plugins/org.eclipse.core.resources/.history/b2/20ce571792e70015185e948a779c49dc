@@ -1,0 +1,56 @@
+import java.io.IOException;
+import java.net.InetSocketAddress;
+import java.net.ServerSocket;
+import java.net.Socket;
+
+
+public class Server {
+	private final static String ADDR = "localhost";
+	private final static int PORT = 9999;
+	
+	private boolean exit = false;
+	
+	private void send(Socket socket, String msg){
+		try {
+			socket.getOutputStream().write(msg.getBytes());
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+	}
+	
+	private String recv(Socket socket){
+		try {
+			byte[] b = new byte[1024];
+			socket.getInputStream().read(b);
+			String result = new String(b);
+			return result.trim();
+		} catch (IOException e) {
+			e.printStackTrace();
+			return null;
+		}	
+	}
+	
+	private void disconn(Socket socket){
+		try {
+			socket.close();
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+	}
+
+	public void start(){
+		try {
+			ServerSocket serverSocket = new ServerSocket();
+			serverSocket.bind(new InetSocketAddress(ADDR, PORT));
+			while(!exit){
+				Socket socket = serverSocket.accept();
+				String msg = recv(socket);
+				send(socket, msg);
+				disconn(socket);
+			}
+			serverSocket.close();
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+	}
+}

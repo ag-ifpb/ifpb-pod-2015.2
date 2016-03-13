@@ -1,0 +1,32 @@
+
+
+
+
+public class CheckMessageTask implements Runnable {
+	private final Object block = new Object();
+	private final ChatService chatService;
+	private final Client client;
+	
+	public CheckMessageTask() {
+		System.out.println("[Ari] criando uma tarefa");
+		chatService = new ChatService();
+		client = new Client();
+	}
+
+	@Override
+	public void run() {
+		//
+		synchronized (block) {
+			System.out.println("[Ari] executando tarefa");
+			//
+			String req = chatService.readMessage();
+			//
+			if (!"".equals(req)){
+				String resp = client.process(req);
+				chatService.writeMessage(resp);
+			}
+		}
+		
+	}
+
+}

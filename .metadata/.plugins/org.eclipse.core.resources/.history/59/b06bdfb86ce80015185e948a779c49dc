@@ -1,0 +1,24 @@
+import java.util.LinkedList;
+import java.util.Queue;
+
+
+/**
+ * Representa a lista de mensagens em memória.
+ * 
+ * @author ari
+ *
+ */
+public class MemoryDatastore {
+	private Queue<String> queue = new LinkedList<String>();
+	private InverseDatastore inverseDatastore = new InverseDatastore();
+	
+	public void readFromFile(){
+		String messages = inverseDatastore.read();
+	}
+	
+	public void writeToFile(String msg){
+		
+	}
+	
+	
+}

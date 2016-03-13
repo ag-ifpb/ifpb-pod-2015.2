@@ -1,0 +1,60 @@
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.IOException;
+
+
+public class MessageDatastore {
+	public final static String FROM = "/Users/ari/Documents/tmp/no1/from.txt";
+	public final static String TO = "/Users/ari/Documents/tmp/no1/to.txt";
+	
+	public void store(String msg){
+		try {
+			//
+			System.out.println("[Ari] enviando mensagem para o servidor.");
+			//
+			File file = new File(TO);
+			//
+			if (!file.exists()) file.createNewFile();
+			//
+			FileOutputStream stream = new FileOutputStream(file, true);
+			stream.write((msg).getBytes());
+			stream.close();
+		} 
+		catch (FileNotFoundException e) {
+			e.printStackTrace();
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+	}
+	
+	public String find(){
+		//
+		StringBuffer sb = new StringBuffer("");
+		try {
+			File file = new File(FROM);
+			if (file.exists()){
+				//
+				System.out.println("[Ari] fazendo a leitura da mensagem enviada");
+				//
+				FileInputStream stream = new FileInputStream(file);
+				//
+				byte[] b = new byte[1024];
+				stream.read(b);
+				stream.close();
+				//
+				String response = new String(b);
+				sb.append(response.trim());
+				//
+				file.delete();
+			}
+		} 
+		catch (FileNotFoundException e) {
+			e.printStackTrace();
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+		return sb.toString();
+	}
+}

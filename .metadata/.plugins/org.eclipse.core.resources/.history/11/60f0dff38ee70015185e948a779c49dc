@@ -1,0 +1,27 @@
+import java.io.IOException;
+import java.net.InetAddress;
+import java.net.InetSocketAddress;
+import java.net.ServerSocket;
+import java.net.Socket;
+import java.net.SocketAddress;
+
+
+public class Server {
+	private final static String ADDR = "localhost";
+	private final static int PORT = 9999;
+
+	private void start(){
+		try {
+			//ServerSocket serverSocket = new ServerSocket(PORT, 2, InetAddress.getByName(ADDR));
+			ServerSocket serverSocket = new ServerSocket();
+			serverSocket.bind(InetSocketAddress.createUnresolved(ADDR, PORT));
+			while(true){
+				Socket socket = serverSocket.accept();
+				
+			}
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+		
+	}
+}

@@ -1,0 +1,17 @@
+package tasks;
+import MemoryDatastore;
+
+
+public class ReadMessagesTask implements Runnable{
+	private final MemoryDatastore datastore;
+	
+	public ReadMessagesTask(MemoryDatastore ds) {
+		datastore = ds;
+	}
+
+	@Override
+	public void run() {
+		datastore.readFromFile();
+	}
+	
+}

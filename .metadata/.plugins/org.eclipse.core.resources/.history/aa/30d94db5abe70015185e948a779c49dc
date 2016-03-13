@@ -1,0 +1,19 @@
+import static org.junit.Assert.assertEquals;
+
+import org.junit.Test;
+
+
+public class ChatServiceTest {
+
+	@Test
+	public void test() {
+		ChatService service = new ChatService();
+		String msg = service.readMessage();
+		service.writeMessage("Message");
+		//executar primeiro o teste desta classe em p1-no1-client
+		assertEquals("Enviando mensagem", msg);
+		
+		
+	}
+
+}

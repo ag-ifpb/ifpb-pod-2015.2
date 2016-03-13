@@ -1,0 +1,46 @@
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertTrue;
+
+import java.io.FileOutputStream;
+import java.io.IOException;
+
+import org.junit.After;
+import org.junit.Before;
+import org.junit.Test;
+
+
+public class ReadMessageTaskTest {
+	
+	@Before
+	public void setup() {
+		try {
+			to.createNewFile();
+			FileOutputStream outputStream = new FileOutputStream(to);
+			outputStream.write(messageto.getBytes());
+			outputStream.flush();
+			outputStream.close();
+		}
+		catch(IOException e){
+			e.printStackTrace();
+		}
+	}
+
+	@Test
+	public void test(){
+		//criando memoria de estocagem
+		DatastoreMemory datastore = new DatastoreMemory();
+		//
+		ReadMessagesTask task = new ReadMessagesTask(datastore);
+		task.run();
+		//
+		assertTrue(datastore.hasMessages());
+		assertEquals(messageto, datastore.recoverAndRemoveMessagesOfMemory());
+		assertFalse(to.exists());
+	}
+	
+	@After
+	public void teardown(){
+		from.delete();
+	}
+}

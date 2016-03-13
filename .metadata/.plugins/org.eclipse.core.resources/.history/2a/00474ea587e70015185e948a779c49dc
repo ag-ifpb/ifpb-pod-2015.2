@@ -1,0 +1,17 @@
+import java.util.Scanner;
+
+
+public class Main {
+
+	public static void main(String[] args) {
+		//
+		ChatService service = new ChatService();
+		Scanner scanner = new Scanner(System.in);
+		//
+		while (true) {
+			service.sendMessage(scanner.next());
+			
+		}
+	}
+	
+}

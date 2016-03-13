@@ -1,0 +1,14 @@
+
+public class ReadMessageTaskTest {
+
+	public void test(){
+		//criando memoria de estocagem
+		DatastoreMemory datastore = new DatastoreMemory();
+		//
+		ReadMessagesTask task = new ReadMessagesTask(datastore);
+		task.run();
+		//
+		
+	}
+	
+}

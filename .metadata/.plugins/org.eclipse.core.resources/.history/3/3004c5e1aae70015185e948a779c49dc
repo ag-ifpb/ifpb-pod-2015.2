@@ -1,0 +1,17 @@
+import static org.junit.Assert.assertEquals;
+
+import org.junit.Test;
+
+
+public class ChatServiceTest {
+
+	@Test
+	public void test() {
+		ChatService service = new ChatService();
+		String msg = service.readMessage();
+		assertEquals("", msg);
+		service.writeMessage("Message");
+		
+	}
+
+}

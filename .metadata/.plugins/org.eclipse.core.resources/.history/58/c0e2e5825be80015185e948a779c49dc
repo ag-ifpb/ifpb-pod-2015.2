@@ -1,0 +1,24 @@
+
+
+
+public class CheckMessageTask implements Runnable {
+	
+	public CheckMessageTask() {
+		System.out.println("[Ari] criando uma tarefa");
+	}
+
+	@Override
+	public void run() {
+		//
+		ChatService chatService = new ChatService();
+		//
+		String req = chatService.readMessage();
+		//
+		if (!"".equals(req)){
+			Client client = new Client();
+			String resp = client.process(req);
+			chatService.writeMessage(resp);
+		}
+	}
+
+}

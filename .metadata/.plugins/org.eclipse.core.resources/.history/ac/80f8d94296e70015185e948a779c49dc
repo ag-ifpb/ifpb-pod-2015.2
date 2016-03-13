@@ -1,0 +1,65 @@
+import java.io.IOException;
+import java.net.Socket;
+
+
+public class Client {
+	private final static String NO2_ADDR = "192.168.1.127";
+	//private final static String NO2_ADDR = "localhost";
+	private final static int NO2_PORT = 9999;
+	
+	private Socket conn(){
+		try {
+			Socket socket = new Socket(NO2_ADDR, NO2_PORT);
+			socket.setKeepAlive(false);
+			return socket;
+		} 
+		catch (IOException e) {
+			e.printStackTrace();
+			return null;
+		}
+	}
+	
+	private void send(Socket socket, String msg){
+		try {
+			socket.getOutputStream().write(msg.getBytes());
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+	}
+	
+	private String recv(Socket socket){
+		try {
+			byte[] b = new byte[1024];
+			socket.getInputStream().read(b);
+			String result = new String(b);
+			return result.trim();
+		} catch (IOException e) {
+			e.printStackTrace();
+			return null;
+		}	
+	}
+	
+	private void disconn(Socket socket){
+		try {
+			socket.close();
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+	}
+	
+	public String process(String msg){
+		//result default
+		String result = "#ERRO: sem connexão.";
+		//communicate
+		Socket socket = conn();
+		if (socket != null){
+			send(socket, msg);
+			result = recv(socket);
+			disconn(socket);
+		}
+		//resulting
+		return result;
+	}
+	
+	
+}

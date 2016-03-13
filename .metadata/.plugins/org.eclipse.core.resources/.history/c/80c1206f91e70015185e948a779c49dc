@@ -1,0 +1,14 @@
+package taskmng;
+import ChatService;
+
+
+public class CheckMessageTask implements Runnable {
+
+	@Override
+	public void run() {
+		ChatService chatService = new ChatService();
+		String msg = chatService.readMessage();
+		
+	}
+
+}

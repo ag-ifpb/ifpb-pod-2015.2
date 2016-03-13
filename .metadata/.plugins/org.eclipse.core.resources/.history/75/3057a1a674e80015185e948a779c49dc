@@ -1,0 +1,36 @@
+
+
+
+public class SendMessageTask implements Runnable {
+	private final Object block = new Object();
+	private final MemoryDatastore memoryDatastore;
+	private final Client client;
+	
+	public SendMessageTask(MemoryDatastore ds, Client c) {
+		System.out.println("[Ari] criando uma tarefa");
+		memoryDatastore = ds;
+		client = c;
+	}
+
+	@Override
+	public void run() {
+		//
+		synchronized (block) {
+			System.out.println("[Ari] executando tarefa");
+			//verificar se há mensagens
+			if (memoryDatastore.hasMessages()){
+				//tentando se conectar
+				client.conn();
+				//verificar se há conexão
+				if (client.isConnected()){
+					//enviando mensagens
+					String resp = client.process(memoryDatastore.recoverAndRemoveMessagesOfMemory());
+					//escrevendo resposta
+					memoryDatastore.writeToFile(resp);
+				}
+			}
+		}
+		
+	}
+
+}

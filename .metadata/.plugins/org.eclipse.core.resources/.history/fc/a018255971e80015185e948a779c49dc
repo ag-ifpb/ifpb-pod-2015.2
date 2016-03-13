@@ -1,0 +1,16 @@
+import java.util.concurrent.Executors;
+import java.util.concurrent.ScheduledExecutorService;
+import java.util.concurrent.TimeUnit;
+
+
+public class Main {
+
+	public static void main(String[] args) {
+		//
+		System.out.println("=============   MIDLEWARE CLIENTE    =================");
+		//criar um executor de tarefas
+		ScheduledExecutorService service = Executors.newSingleThreadScheduledExecutor();
+		//executa a tarefa de checar mensagens que devem ser enviadas
+		service.scheduleAtFixedRate(new CheckMessageTask(), 1000, 10000, TimeUnit.MILLISECONDS);
+	}
+}

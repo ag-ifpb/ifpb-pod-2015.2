@@ -1,0 +1,37 @@
+import java.io.PrintWriter;
+import java.util.Scanner;
+
+
+public class Main {
+	private static boolean exit = false;
+}
+
+	public static void main(String[] args) {
+		//
+		final ChatService service = new ChatService();
+		final Scanner scanner = new Scanner(System.in);
+		final PrintWriter writer = new PrintWriter(System.out);
+		//thread para leitura
+		Thread tread = new Thread(){
+			public void run() {
+				while(true){
+					service.sendMessage(scanner.next());
+				}
+			};
+		};
+		tread.start();
+		//thread para escrita
+		Thread twrite = new Thread(){
+			public void run() {
+				while(true){
+					writer.write(service.receiveMessage());
+				}
+			};
+		};
+		twrite.start();
+		//
+		while(true){
+		
+	}
+	
+}

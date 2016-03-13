@@ -1,0 +1,9 @@
+
+public class ReadMessageTaskTest {
+
+	public void test(){
+		
+		ReadMessagesTask task = new ReadMessagesTask(ds);
+	}
+	
+}

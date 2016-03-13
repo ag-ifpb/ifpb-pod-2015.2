@@ -1,0 +1,27 @@
+
+
+
+public class CheckMessageTask implements Runnable {
+
+	@Override
+	public void run() {
+		//
+		System.out.println("Debug: executando");
+		//
+		ChatService chatService = new ChatService();
+		//
+		String req = chatService.readMessage();
+		//
+		System.out.println("Debug: conectando cliente");
+		//
+		Client client = new Client();
+		String resp = client.process(req);
+		//
+		System.out.println("Debug: acessando");
+		//
+		chatService.writeMessage(resp);
+		//
+		System.out.println("Debug: fim executando");
+	}
+
+}

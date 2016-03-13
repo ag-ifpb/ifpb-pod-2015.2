@@ -1,0 +1,42 @@
+import java.io.IOException;
+import java.net.Socket;
+
+
+public class Communicator {
+	private final static String NO2_ADDR = "";
+	private final static int NO2_PORT = 9999; 
+	
+	private Socket conn(){
+		try {
+			Socket socket = new Socket(NO2_ADDR, NO2_PORT);
+			return socket;
+		} 
+		catch (IOException e) {
+			e.printStackTrace();
+			return null;
+		}
+	}
+	
+	public void send(Socket socket, String msg){
+		try {
+			socket.getOutputStream().write(msg.getBytes());
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+	}
+	
+	public String read(Socket socket){
+		try {
+			byte[] b = new byte[1024];
+			socket.getInputStream().read(b);
+			String result = new String(b);
+			return result.trim();
+		} catch (IOException e) {
+			e.printStackTrace();
+			return null;
+		}
+		
+	}
+	
+	
+}

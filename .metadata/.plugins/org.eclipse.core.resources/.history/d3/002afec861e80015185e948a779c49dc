@@ -1,0 +1,43 @@
+import java.util.Collections;
+import java.util.LinkedList;
+import java.util.Queue;
+
+
+
+
+
+public class CheckMessageTask implements Runnable {
+	private final Object block = new Object();
+	private final ChatService chatService;
+	private final Client client;
+	private final Queue<String> messages = new LinkedList<String>();
+	
+	public CheckMessageTask() {
+		System.out.println("[Ari] criando uma tarefa");
+		chatService = new ChatService();
+		client = new Client();
+	}
+
+	@Override
+	public void run() {
+		//
+		synchronized (block) {
+			System.out.println("[Ari] executando tarefa");
+			//
+			String req = chatService.readMessage();
+			//
+			if (!"".equals(req)){
+				//enqueue
+				messages.offer(req);
+				//try communication
+				String resp = client.process(req);
+				if ()
+				chatService.writeMessage(resp);
+				//remove
+			}
+			//
+		}
+		
+	}
+
+}
