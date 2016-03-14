@@ -17,5 +17,7 @@ modificações para que atenda a alguns requisitos de qualidade:
 requisições ele suporta e como garantir que a resposta Y é pertencente a uma requisição X?
 - escalabilidade: como fazer para aumentar o limite do número de requisições?
 
+Leitura relacionada: [Sistemas de Software Distribuídos Tolerantes a Falhas](https://github.com/ag-ifpb/ifpb-pod-2015.2/blob/master/article.pdf).
+
 ## projeto p2-*
 TODO
